@@ -26,10 +26,11 @@ const crypto = require("crypto");
 const userDB = require("./user_db");
 
 const appPort = 3332;
-const localAddr = "127.0.0.1";
+const localAddr = "localhost";
 const tokenLifeSpan = 2 * 60 * 60 * 1000; // in [ms]
 const clearTokenInterval = 15 * 1000; // in [ms]
 
+const acceptAllHosts = process.argv.includes("--acceptAllHosts");
 
 
 
@@ -95,7 +96,7 @@ app.get("/userid", function (req, res) {
 	res.json({userID : tokenDB[req.query.token].userID});
 });
 
-
-app.listen(appPort, localAddr, function () {
+console.log("acceptAllHosts:" + acceptAllHosts);
+app.listen(appPort, acceptAllHosts ? null : localAddr, function () {
 	console.log("Auth app listening on port " + appPort);
 });
