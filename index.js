@@ -64,7 +64,8 @@ app.delete("/token/:token", function (req, res) {
 });
 
 app.get("/token", function (req, res) {
-	if(!req.query.hasOwnProperty("userName") || !req.query.hasOwnProperty("password")) {
+	if(!req.query.hasOwnProperty("userName") || req.query.userName === ""
+	|| !req.query.hasOwnProperty("password") || req.query.password === "") {
 		res.status(400).send("Missing user name or password");
 		return;
 	}
