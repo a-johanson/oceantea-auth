@@ -23,7 +23,7 @@ catch(err) {
 const express = require("express");
 const crypto = require("crypto");
 
-const userDB = require("./user_db");
+const userDB = require("./config/user_db");
 
 const appPort = 3332;
 const localAddr = "localhost";
@@ -96,7 +96,7 @@ app.get("/userid", function (req, res) {
 	res.json({userID : tokenDB[req.query.token].userID});
 });
 
-console.log("acceptAllHosts:" + acceptAllHosts);
+console.log("acceptAllHosts: " + acceptAllHosts);
 app.listen(appPort, acceptAllHosts ? null : localAddr, function () {
 	console.log("Auth app listening on port " + appPort);
 });
